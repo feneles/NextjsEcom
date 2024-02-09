@@ -9,9 +9,9 @@ export type ProductListItemType = {
 
 export const ProductListItem = ({ description, coverImage }: ProductListItemType) => {
 	return (
-		<div className="group rounded-md bg-slate-200 p-2 hover:cursor-pointer">
+		<li className="group rounded-md bg-slate-200 p-2 hover:cursor-pointer">
 			<ProductCoverImage alt={coverImage.alt} src={coverImage.src} />
 			<ProductDescription {...description} />
-		</div>
+		</li>
 	);
 };

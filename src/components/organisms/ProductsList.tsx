@@ -6,10 +6,10 @@ type ProductsListType = {
 
 export const ProductsList = ({ products }: ProductsListType) => {
 	return (
-		<div className="flex flex-wrap gap-4" data-testid="products-list">
+		<ul className="flex flex-wrap gap-4" data-testid="products-list">
 			{products.map((product) => (
 				<ProductListItem key={product.id} {...product} />
 			))}
-		</div>
+		</ul>
 	);
 };

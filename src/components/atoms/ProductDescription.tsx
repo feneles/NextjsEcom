@@ -8,7 +8,7 @@ export type ProductDescriptionType = {
 
 export const ProductDescription = ({ category, name, price }: ProductDescriptionType) => {
 	return (
-		<div className="flex flex-col gap-2 p-2">
+		<div className="flex flex-col gap-2 pt-2 text-xs">
 			<div className="flex justify-between">
 				<p>{name}</p>
 				<p>{priceFormat(price / 100)}</p>
