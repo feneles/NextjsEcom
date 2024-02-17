@@ -28,7 +28,6 @@ export default async function ProductPage({ params: { slug } }: { params: { slug
 					</button>
 				</div>
 			</div>
-
 			<ProductCarousel images={product.imagesCollection.items} />
 		</div>
 	);

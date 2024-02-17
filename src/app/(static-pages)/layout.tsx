@@ -3,5 +3,5 @@ export default function StaticLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <div className="flex items-center justify-center">{children}</div>;
+	return <div className="flex h-full w-full items-center justify-center">{children}</div>;
 }
