@@ -1,17 +1,17 @@
 import Image from "next/image";
 
 export type ProductCoverImageType = {
-	src: string;
-	alt: string;
+	url: string;
+	title: string;
 };
 
-export const ProductCoverImage = ({ src, alt }: ProductCoverImageType) => {
+export const ProductCoverImage = ({ url, title }: ProductCoverImageType) => {
 	return (
 		<div className="relative h-72 w-64 overflow-hidden">
 			<Image
 				className=" transition-transform group-hover:scale-105"
-				src={src}
-				alt={alt}
+				src={url}
+				alt={title}
 				objectFit="cover"
 				layout="fill"
 			/>

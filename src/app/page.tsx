@@ -1,10 +1,12 @@
-import { ProductsList } from "@/components/organisms/ProductsList";
-import { productsMock } from "@/dataMock";
+import { ProductsList } from "@ui/organisms/ProductsList";
+import { getProducts } from "@/contentful/contentfulApi";
 
-export default function Home() {
+export default async function Home() {
+	const products = await getProducts();
+
 	return (
 		<section className="flex min-h-screen flex-col items-center justify-between p-24">
-			<ProductsList products={productsMock} />
+			<ProductsList products={products} />
 		</section>
 	);
 }

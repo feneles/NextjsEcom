@@ -8,7 +8,7 @@ export const ProductsList = ({ products }: ProductsListType) => {
 	return (
 		<ul className="flex flex-wrap gap-4" data-testid="products-list">
 			{products.map((product) => (
-				<ProductListItem key={product.id} {...product} />
+				<ProductListItem key={product.slug} {...product} />
 			))}
 		</ul>
 	);
