@@ -123,3 +123,27 @@ export const getHomePageProducts = async (): Promise<Product[]> => {
 	);
 	return data.productCollection.items;
 };
+
+// Get categories
+
+const getCategoriesQuery = gql`
+	query {
+		productCollection {
+			items {
+				category
+			}
+		}
+	}
+`;
+
+export const getCategories = async (): Promise<string[]> => {
+	const data = await graphQLClient.request<{ productCollection: ProductCollection }>(
+		getCategoriesQuery,
+	);
+
+	const categories = data.productCollection.items.map((item) => item.category);
+
+	const uniqueCategories = Array.from(new Set(categories));
+
+	return uniqueCategories;
+};
