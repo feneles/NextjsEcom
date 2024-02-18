@@ -6,8 +6,11 @@ const endpoint = `https://graphql.contentful.com/content/v1/spaces/${process.env
 const graphQLClient = new GraphQLClient(endpoint, {
 	headers: {
 		authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+		"Content-Type": "application/json",
 	},
 });
+
+// Get all products
 
 const getProductsQuery = gql`
 	query {
@@ -32,6 +35,8 @@ export const getProducts = async (): Promise<Product[]> => {
 	);
 	return data.productCollection.items;
 };
+
+// Get product by slug
 
 const getProductBySlugQuery = gql`
 	query GetProductBySlug($slug: String!) {
@@ -63,5 +68,58 @@ export const getProductBySlug = async (slug: string): Promise<Product | null> =>
 		getProductBySlugQuery,
 		{ slug },
 	);
-	return data.productCollection.items[0] || null;
+	return data.productCollection.items[0];
+};
+
+// Get products by category
+
+const getProductsByCategoryQuery = gql`
+	query GetProductsByCategory($category: String!) {
+		productCollection(where: { category: $category }) {
+			items {
+				name
+				slug
+				coverImage {
+					url
+					title
+				}
+				price
+				category
+			}
+		}
+	}
+`;
+
+export const getProductsByCategory = async (category: string): Promise<Product[]> => {
+	const data = await graphQLClient.request<{ productCollection: ProductCollection }>(
+		getProductsByCategoryQuery,
+		{ category },
+	);
+	return data.productCollection.items;
+};
+
+// Get home page products
+
+const getHomePageProductsQuery = gql`
+	query {
+		productCollection(limit: 3) {
+			items {
+				name
+				slug
+				coverImage {
+					url
+					title
+				}
+				price
+				category
+			}
+		}
+	}
+`;
+
+export const getHomePageProducts = async (): Promise<Product[]> => {
+	const data = await graphQLClient.request<{ productCollection: ProductCollection }>(
+		getHomePageProductsQuery,
+	);
+	return data.productCollection.items;
 };

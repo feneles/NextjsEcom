@@ -1,8 +1,34 @@
-import { ProductCarousel } from "@/components/molecules/ProductCarousel";
-import { ProductImages } from "@/components/atoms/ProductCurrentImage";
+import { ProductCarousel } from "@ui/molecules/ProductCarousel";
+import { ProductImages } from "@ui/atoms/ProductCurrentImage";
 import { getProductBySlug } from "@/contentful/contentfulApi";
-import { Loader } from "@/components/atoms/Loader";
+import { Loader } from "@ui/atoms/Loader";
 import { priceFormat } from "@/utils";
+
+export const generateMetadata = async ({ params: { slug } }: { params: { slug: string } }) => {
+	const product = await getProductBySlug(slug);
+
+	if (!product) {
+		return {
+			title: "Ecom Store",
+		};
+	}
+	const title = product.name;
+	const description = product.description;
+	return {
+		title: `${title} | Ecom Store`,
+		description: description,
+		openGraph: {
+			title: `${title} | Ecom Store`,
+			description: description,
+			images: [
+				{
+					url: product.coverImage.url,
+					alt: product.coverImage.title,
+				},
+			],
+		},
+	};
+};
 
 export default async function ProductPage({ params: { slug } }: { params: { slug: string } }) {
 	const product = await getProductBySlug(slug);
@@ -19,7 +45,7 @@ export default async function ProductPage({ params: { slug } }: { params: { slug
 				</div>
 				<div className="flex w-full flex-col gap-4">
 					<div>
-						<h2 className="mb-2 text-2xl font-bold">{product.name}</h2>
+						<h1 className="mb-2 text-2xl font-bold">{product.name}</h1>
 						<p className="mb-4 text-gray-700">{product.description}</p>
 						<p className="text-right text-lg font-semibold">{priceFormat(product.price)}</p>
 					</div>

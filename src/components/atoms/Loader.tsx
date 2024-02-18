@@ -1,5 +1,5 @@
 export const Loader = () => (
-	<div className="absolute left-2/4 top-2/4">
+	<div className="absolute left-2/4 top-2/4" aria-busy="true">
 		<svg
 			aria-hidden="true"
 			className="h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
