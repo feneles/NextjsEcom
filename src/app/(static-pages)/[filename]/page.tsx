@@ -8,7 +8,7 @@ export default async function StaticPage({ params }: { params: { filename: strin
 	);
 
 	return (
-		<article className="prose">
+		<article className="prose min-h-96">
 			<Content />
 		</article>
 	);
